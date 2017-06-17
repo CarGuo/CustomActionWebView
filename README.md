@@ -31,4 +31,45 @@ dependencies {
 
 ![](https://ooo.0o0.ooo/2017/06/17/59450f5c52301.gif)
 
+
+### 使用实例
+
+和普通的webview使用基本一致
+
+```
+List<String> list = new ArrayList<>();
+list.add("Item1");
+list.add("Item2");
+list.add("Item3");
+
+mCustomActionWebView.setWebViewClient(new bViewClient());
+
+//设置item
+mCustomActionWebView.setActionList(list);
+
+//链接js注入接口，使能选中返回数据
+mCustomActionWebView.linkJSInterface();
+
+ctionWebView.getSettings().setBuiltInZoomContro;
+ctionWebView.getSettings().setDisplayZoomContro);
+//使用javascript
+ctionWebView.getSettings().setJavaScriptEnabled
+ctionWebView.getSettings().setDomStorageEnabled
+
+
+//增加点击回调
+ctionWebView.setActionSelectListener(new lectListener() {
+    @Override
+    public void onClick(String title, String xt) {
+        Toast.makeText(MainActivity.this, tem: " + title + "。\n\nValue: " + selectText, NGTH_LONG).show();
+    }
+});
+
+//加载url
+mCustomActionWebView.postDelayed(new Runnable() 
+    @Override
+    public void run() {
+        mCustomActionWebView.loadUrl("http://shu.com/p/b32187d6e0ad");
+    }
+}, 1000);
 ```
