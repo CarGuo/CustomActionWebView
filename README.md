@@ -16,7 +16,7 @@ allprojects {
 #### 在module下的build.gradle添加
 ```
 dependencies {
-    'com.github.CarGuo:CustomActionWebView:v1.0.1'
+   compile 'com.github.CarGuo:CustomActionWebView:v1.0.1'
 }
 ```
 
