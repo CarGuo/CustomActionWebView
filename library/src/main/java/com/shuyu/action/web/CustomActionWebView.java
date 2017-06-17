@@ -1,15 +1,13 @@
-package com.shuyu;
+package com.shuyu.action.web;
 
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +23,8 @@ public class CustomActionWebView extends WebView {
     ActionMode mActionMode;
 
     List<String> mActionList = new ArrayList<>();
+
+    ActionSelectListener mActionSelectListener;
 
     public CustomActionWebView(Context context) {
         super(context);
@@ -57,11 +57,7 @@ public class CustomActionWebView extends WebView {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         getSelectedData((String) item.getTitle());
-
-                        if (mActionMode != null) {
-                            mActionMode.finish();
-                            mActionMode = null;
-                        }
+                        releaseAction();
                         return true;
                     }
                 });
@@ -81,6 +77,13 @@ public class CustomActionWebView extends WebView {
     public ActionMode startActionMode(ActionMode.Callback callback, int type) {
         ActionMode actionMode = super.startActionMode(callback, type);
         return resolveActionMode(actionMode);
+    }
+
+    private void releaseAction() {
+        if (mActionMode != null) {
+            mActionMode.finish();
+            mActionMode = null;
+        }
     }
 
     /**
@@ -121,6 +124,22 @@ public class CustomActionWebView extends WebView {
     }
 
     /**
+     * 设置点击回掉
+     * @param actionSelectListener
+     */
+    public void setActionSelectListener(ActionSelectListener actionSelectListener) {
+        this.mActionSelectListener = actionSelectListener;
+    }
+
+    /**
+     * 隐藏消失Action
+     */
+    public void dismissAction() {
+        releaseAction();
+    }
+
+
+    /**
      * js选中的回掉接口
      */
     private class ActionSelectInterface {
@@ -133,7 +152,9 @@ public class CustomActionWebView extends WebView {
 
         @JavascriptInterface
         public void callback(final String value, final String title) {
-            Toast.makeText(mContext.getContext(), "Click Item: " + title + ", Value: " + value, Toast.LENGTH_LONG).show();
+            if(mActionSelectListener != null) {
+                mActionSelectListener.onClick(title, value);
+            }
         }
     }
 }

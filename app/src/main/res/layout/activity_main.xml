@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.shuyu.CustomActionWebView
+    <com.shuyu.action.web.CustomActionWebView
         android:id="@+id/customActionWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

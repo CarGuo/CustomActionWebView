@@ -1,35 +1,26 @@
 package com.shuyu;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.GeolocationPermissions;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.shuyu.action.web.ActionSelectListener;
+import com.shuyu.action.web.CustomActionWebView;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 
     View mLadingView;
-
+    CustomActionWebView mCustomActionWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,30 +28,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mLadingView = findViewById(R.id.loadingView);
-        final CustomActionWebView customActionWebView = (CustomActionWebView)findViewById(R.id.customActionWebView);
+        mCustomActionWebView = (CustomActionWebView)findViewById(R.id.customActionWebView);
 
 
         List<String> list = new ArrayList<>();
-        list.add("aaa");
-        list.add("bbb");
-        list.add("ccc");
+        list.add("Item1");
+        list.add("Item2");
+        list.add("Item3");
 
-        customActionWebView.setWebViewClient(new CustomWebViewClient());
-        customActionWebView.setActionList(list);
-        customActionWebView.linkJSInterface();
-        customActionWebView.getSettings().setBuiltInZoomControls(true);
-        customActionWebView.getSettings().setDisplayZoomControls(false);
-        customActionWebView.getSettings().setJavaScriptEnabled(true);
-        customActionWebView.getSettings().setDomStorageEnabled(true);
+        mCustomActionWebView.setWebViewClient(new CustomWebViewClient());
+        mCustomActionWebView.setActionList(list);
+        mCustomActionWebView.linkJSInterface();
+        mCustomActionWebView.getSettings().setBuiltInZoomControls(true);
+        mCustomActionWebView.getSettings().setDisplayZoomControls(false);
+        mCustomActionWebView.getSettings().setJavaScriptEnabled(true);
+        mCustomActionWebView.getSettings().setDomStorageEnabled(true);
 
-        customActionWebView.postDelayed(new Runnable() {
+
+        mCustomActionWebView.setActionSelectListener(new ActionSelectListener() {
+            @Override
+            public void onClick(String title, String selectText) {
+                Toast.makeText(MainActivity.this, "Click Item: " + title + "。\n\nValue: " + selectText, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mCustomActionWebView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                customActionWebView.loadUrl("http://www.jianshu.com/p/b32187d6e0ad");
+                mCustomActionWebView.loadUrl("http://www.jianshu.com/p/b32187d6e0ad");
             }
         }, 1000);
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mCustomActionWebView != null) {
+            mCustomActionWebView.dismissAction();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     private class CustomWebViewClient extends WebViewClient {
 
