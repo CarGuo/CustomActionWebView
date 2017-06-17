@@ -37,14 +37,21 @@ public class MainActivity extends AppCompatActivity {
         list.add("Item3");
 
         mCustomActionWebView.setWebViewClient(new CustomWebViewClient());
+
+        //设置item
         mCustomActionWebView.setActionList(list);
+
+        //链接js注入接口，使能选中返回数据
         mCustomActionWebView.linkJSInterface();
+
         mCustomActionWebView.getSettings().setBuiltInZoomControls(true);
         mCustomActionWebView.getSettings().setDisplayZoomControls(false);
+        //使用javascript
         mCustomActionWebView.getSettings().setJavaScriptEnabled(true);
         mCustomActionWebView.getSettings().setDomStorageEnabled(true);
 
 
+        //增加点击回调
         mCustomActionWebView.setActionSelectListener(new ActionSelectListener() {
             @Override
             public void onClick(String title, String selectText) {
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //加载url
         mCustomActionWebView.postDelayed(new Runnable() {
             @Override
             public void run() {
