@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/CarGuo/CustomActionWebView.svg?branch=master)](https://travis-ci.org/CarGuo/CustomActionWebView)
 
 
-#### [实现解析](http://www.jianshu.com/p/16713361bbd3)
+## [实现解析](http://www.jianshu.com/p/16713361bbd3)
 
 #### 在project下的build.gradle添加
 ```
@@ -80,7 +80,17 @@ mCustomActionWebView.postDelayed(new Runnable()
 ### webView使用详细解析
 
 * Demo中的APIWebViewActivity.java
-
+```
+/**
+ * 演示WebView中的Api说明、js交互的方法，还有注意事项
+ * <p>
+ * 1、内存泄漏防备
+ * 2、配置webView
+ * 3、页面加载开始，错误，拦截请求，接受Error等
+ * 4、页面加载进度，title，图标，js弹框等
+ * 5、js交互与安全
+ */
+```
 
 ### 其他WebView推荐
 
