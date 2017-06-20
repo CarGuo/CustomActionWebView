@@ -124,6 +124,14 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
         //其他细节操作
         //webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
         webSettings.setAllowFileAccess(true); //设置可以访问文件
+
+        //对于不需要使用 file 协议的应用，禁用 file 协议；防止文件泄密，file协议即是file://
+        //webSettings.setAllowFileAccess(false);
+        //webSettings.setAllowFileAccessFromFileURLs(false);
+        //webSettings.setAllowUniversalAccessFromFileURLs(false);
+
+
+
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
@@ -321,6 +329,7 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
     private class JsCallAndroidInterface {
 
         //@JavascriptInterface注解方法，js端调用，4.2以后安全
+        //4.2以前，当JS拿到Android这个对象后，就可以调用这个Android对象中所有的方法，包括系统类（java.lang.Runtime 类），从而进行任意代码执行。
         @JavascriptInterface
         public void callback(String msg) {
             Toast.makeText(APIWebViewActivity.this, "JS方法回调到web了 ：" + msg, Toast.LENGTH_SHORT).show();
