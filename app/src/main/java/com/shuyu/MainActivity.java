@@ -1,5 +1,6 @@
 package com.shuyu;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         list.add("Item1");
         list.add("Item2");
-        list.add("Item3");
+        list.add("APIWeb");
 
         mCustomActionWebView.setWebViewClient(new CustomWebViewClient());
 
@@ -55,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         mCustomActionWebView.setActionSelectListener(new ActionSelectListener() {
             @Override
             public void onClick(String title, String selectText) {
+                if(title.equals("APIWeb")) {
+                    Intent intent = new Intent(MainActivity.this, APIWebViewActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 Toast.makeText(MainActivity.this, "Click Item: " + title + "。\n\nValue: " + selectText, Toast.LENGTH_LONG).show();
             }
         });

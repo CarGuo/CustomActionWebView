@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Local Title</title>
+    <script>
+
+        //给原生调用的
+        function callJS(){
+            alert("Android调用了web js");
+        }
+
+        //html js调用原生接口
+        function callInterface(){
+            JSCallBackInterface.callback("我是web的js哟");
+        }
+
+        //html js和原生交互的第二种
+        function callInterface2(){
+            document.location = "js://Authority?pra1=111&pra2=222";
+        }
+
+        function clickPrompt(){
+            // 调用prompt（）
+            var result=prompt("js://Authority?pra1=111&pra2=222");
+        }
+      </script>
+</head>
+<body>
+<button type="button" id="buttonxx" onclick="callInterface()">点我调用原生android方法</button>
+<button type="button" id="buttonxx2" onclick="callInterface2()">点我调用原生android方法2</button>
+<button type="button" id="buttonxx3" onclick="clickPrompt()">点我调用原生android方法3</button>
+</body>
+</html>
