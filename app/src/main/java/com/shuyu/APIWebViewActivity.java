@@ -275,15 +275,7 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
                 /**
                  * 有时候，为了安全考虑，js的参数回调，会通过这类地方回调回来，然后不弹出框。
                  */
-                Uri uri = Uri.parse(message);
-                if ( uri.getScheme().equals("js")) {
-                    if (uri.getAuthority().equals("Authority")) {
-
-                        //Set<String> collection = uri.getQueryParameterNames();
-                        //参数result:代表消息框的返回值(输入值)
-                        //result.confirm("JS 3方法回调到web");
-                        Toast.makeText(APIWebViewActivity.this, "JS 3方法回调到web了", Toast.LENGTH_SHORT).show();
-                    }
+                if(resolveJSPrompt(message)) {
                     return true;
                 }
                 return super.onJsPrompt(view, url, message, defaultValue, result);
@@ -323,6 +315,7 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     /**
+     * js与web交互1
      * js 与 原生交互接口
      */
     private class JsCallAndroidInterface {
@@ -335,6 +328,7 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     /**
+     * js与web交互2
      * 通过 shouldOverrideUrlLoading 与 js交互
      */
     private boolean resolveShouldLoadLogic(String url) {
@@ -346,6 +340,25 @@ public class APIWebViewActivity extends AppCompatActivity implements View.OnClic
                 //Set<String> collection = uri.getQueryParameterNames();
                 Toast.makeText(APIWebViewActivity.this, "JS 2方法回调到web了", Toast.LENGTH_SHORT).show();
 
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * js与web交互3
+     * 通过 onJsPrompt 与 js交互
+     */
+    private boolean resolveJSPrompt(String message) {
+        Uri uri = Uri.parse(message);
+        if ( uri.getScheme().equals("js")) {
+            if (uri.getAuthority().equals("Authority")) {
+
+                //Set<String> collection = uri.getQueryParameterNames();
+                //参数result:代表消息框的返回值(输入值)
+                //result.confirm("JS 3方法回调到web");
+                Toast.makeText(APIWebViewActivity.this, "JS 3方法回调到web了", Toast.LENGTH_SHORT).show();
             }
             return true;
         }
