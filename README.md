@@ -4,6 +4,9 @@
 [![](https://jitpack.io/v/CarGuo/CustomActionWebView.svg)](https://jitpack.io/#CarGuo/CustomActionWebView)
 [![Build Status](https://travis-ci.org/CarGuo/CustomActionWebView.svg?branch=master)](https://travis-ci.org/CarGuo/CustomActionWebView)
 
+
+#### [实现解析](http://www.jianshu.com/p/16713361bbd3)
+
 #### 在project下的build.gradle添加
 ```
 allprojects {
