@@ -73,3 +73,10 @@ mCustomActionWebView.postDelayed(new Runnable()
     }
 }, 1000);
 ```
+
+
+### 其他WebView推荐
+
+* [Android开发：最全面、最易懂的Webview使用详解](http://www.jianshu.com/p/3c94ae673e2a)
+* [最全面总结 Android WebView与 JS 的交互方式](http://www.jianshu.com/p/345f4d8a5cfa)
+* [你不知道的 Android WebView 使用漏洞](http://www.jianshu.com/p/3a345d27cd42)
